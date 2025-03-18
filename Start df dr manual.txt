@@ -1,0 +1,35 @@
+# Define a list of specific Data Factory names to start triggers in East US
+$SelectedDataFactories = @("victra-dev-datafactory-saleforce")  # Replace with the actual names of the Data Factories
+
+# Get Data Factories located in East US and filter by the selected names
+$AzureDataFactories = Get-AzDataFactoryV2 | Where-Object { $_.Location -eq 'eastus' -and $SelectedDataFactories -contains $_.DataFactoryName }
+
+# Display the selected Data Factories in East US
+$AzureDataFactories
+
+foreach ($AzureDataFactory in $AzureDataFactories) { 
+
+    $ResourceGroupName = $AzureDataFactory.ResourceGroupName
+    $DataFactoryName = $AzureDataFactory.DataFactoryName
+
+    $AzDataFactoryV2Triggers = Get-AzDataFactoryV2Trigger -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName
+
+    foreach ($AzDataFactoryV2Trigger in $AzDataFactoryV2Triggers) { 
+
+        if ($AzDataFactoryV2Trigger.RuntimeState -eq "Stopped") {
+            # Start the trigger if it's currently stopped
+            Start-AzDataFactoryV2Trigger -Name $AzDataFactoryV2Trigger.Name -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName -Force -Confirm:$false -Verbose
+            Write-Host "Started trigger:" $AzDataFactoryV2Trigger.Name "in" $DataFactoryName
+        }
+        else {
+            Write-Host $AzDataFactoryV2Trigger.Name "in" $DataFactoryName "is already running"
+        }
+    }
+
+ # Publish Data Factory if any triggers have been started
+    if ($TriggersStarted) {
+        Write-Host "Publishing Data Factory:" $DataFactoryName
+        # Use Set-AzDataFactoryV2 to publish any pending changes
+        Set-AzDataFactoryV2 -ResourceGroupName $ResourceGroupName -Name $DataFactoryName -Confirm:$false -Verbose
+    }
+}

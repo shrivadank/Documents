@@ -1,0 +1,21 @@
+try {
+    # Define the names of the two specific Function Apps you want to start
+    $functionAppNames = @("fn-adp-cico-prod","fn-seer-data-sync-prod","fn-vision-v2-etl-prod","fn-eargo-prod","fn-MDMAPIHelper-prod","fn-sync-order-details-prod","fn-sync-order-summary-prod","fn-tbv-welcome-email-prod","fn-victra-ris-prod","Fn-CatReport-Total-prod","Fn-DwnChargeUser-prod","fn-cornerstone-report-edw-etl-prod","fn-seer-verizon-edw-etl-prod","fn-seertbv-edw-etl-prod","fn-vision-mobile-edw-etl-prod","IngramMicroFunApp-Prod","Fn-MdmV2RQSync-Prod","fn-SCFEventHandler-prod")
+
+    # Retrieve the Function Apps in eastus that match the specified names
+    $functionApps = Get-AzFunctionApp | Where-Object {
+        ($_.location -eq "eastus" -or $_.location -eq "East US") -and ($functionAppNames -contains $_.Name)
+    }
+
+    # Start each specified function app
+    foreach ($functionApp in $functionApps) {
+        Start-AzFunctionApp -Name $functionApp.Name -ResourceGroupName $functionApp.ResourceGroupName
+        Write-Host "Started Function App: $($functionApp.Name)"
+    }
+
+    Write-Host "Selected Azure Functions started successfully."
+
+} catch {
+    Write-Host "Error starting Azure Functions:"
+    Write-Host $_.Exception.Message
+}

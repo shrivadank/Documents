@@ -1,0 +1,21 @@
+try {
+    # Define the names of the two specific Function Apps you want to failover
+    $functionAppNames = @("fn-tbv-welcome-email-prod","fn-message-sender-prod","fn-oracle-reports-prod","fn-alert-ispu-create-prod","fn-Truist-prod","fn-immdevicereturnsxml-prod","fn-immreturn-prod","fn-dwn-ManageCustomerProfile-prod","fn-GetInventoryAvailability-prod","fn-TBVPurchaseOrders-prod","Fn-VidaPayGetPOStatus-prod","Fn-TBVAssignUnassignStores-prod","fn-eargo-prod")
+
+    # Retrieve the Function Apps in eastus that match the specified names
+    $functionApps = Get-AzFunctionApp | Where-Object {
+        ($_.location -eq "eastus" -or $_.location -eq "East US") -and ($functionAppNames -contains $_.Name)
+    }
+
+    # Stop each specified function
+    foreach ($functionApp in $functionApps) {
+        Stop-AzFunctionApp -Name $functionApp.Name -ResourceGroupName $functionApp.ResourceGroupName -Force
+        Write-Host "Stopped Function App: $($functionApp.Name)"
+    }
+
+    Write-Host "Selected Azure Functions stopped successfully."
+
+} catch {
+    Write-Host "Error stopping Azure Functions:"
+    Write-Host $_.Exception.Message
+}

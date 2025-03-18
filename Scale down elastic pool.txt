@@ -1,0 +1,1 @@
+Set-AzSqlElasticPool -ResourceGroupName "victra-sql-databases-rg" -ServerName "victra-sql-dr-dbserver" -ElasticPoolName "victra-sql-db-epool-dr" -Dtu 100

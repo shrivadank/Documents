@@ -1,0 +1,67 @@
+$DiagnosticSettingName = "push_logs_to_law"
+$AzureDataFactories = Get-AzDataFactoryV2 | Where-Object {$_.location -eq 'West US' -or $_.location -eq 'westus'}
+$AzureDataFactories.Count
+$resourceIds = $AzureDataFactories.DataFactoryId
+$WorkspaceId = "/subscriptions/5b0534a7-bcc7-4078-aa32-3730b0455b01/resourceGroups/support-rotation-prod-rg-dr/providers/Microsoft.OperationalInsights/workspaces/support-rotation-prod-law-dr"
+
+foreach ($resourceId in $resourceIds) {
+    Write-Host '=============================================='
+    Write-Host "Processing resource: $resourceId"
+
+    # Check if the diagnostic setting already exists
+    $existingSetting = Get-AzDiagnosticSetting -ResourceId $resourceId | Where-Object { $_.Name -eq $DiagnosticSettingName }
+
+if ($existingSetting.LogAnalyticsDestinationType -eq "Dedicated") {
+ 
+        Write-Host "Diagnostic setting '$DiagnosticSettingName' already exists for $resourceId. Skipping..."
+    } else {
+        Write-Host "Creating diagnostic setting '$DiagnosticSettingName' for $resourceId..."
+
+        # Define metric settings
+        $metricSettings = @{
+            Category = "AllMetrics"
+            Enabled = $true
+            RetentionPolicy = @{
+                Enabled = $true
+                Days = 30
+            }
+        }
+
+        # Define log settings
+        $logSettings = @(
+            @{
+                Category = "PipelineRuns"
+                Enabled = $true
+                RetentionPolicy = @{
+                    Enabled = $true
+                    Days = 30
+                }
+            },
+            @{
+                Category = "ActivityRuns"
+                Enabled = $true
+                RetentionPolicy = @{
+                    Enabled = $true
+                    Days = 30
+                }
+            },
+            @{
+                Category = "TriggerRuns"
+                Enabled = $true
+                RetentionPolicy = @{
+                    Enabled = $true
+                    Days = 30
+                }
+            }
+        )
+
+        # Create the diagnostic setting with metrics and logs
+        New-AzDiagnosticSetting -Name $DiagnosticSettingName `
+                                -ResourceId $resourceId `
+                                -WorkspaceId $WorkspaceId `
+                                -Metric $metricSettings `
+                                -Log $logSettings `
+                                -LogAnalyticsDestinationType "Dedicated"
+                                
+    }
+}

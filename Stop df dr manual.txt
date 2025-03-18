@@ -1,0 +1,28 @@
+# Define a list of specific Data Factory names to stop in East US
+$SelectedDataFactories = @("victra-dev-datafactory-saleforce")  # Replace with the actual names of the Data Factories
+
+# Get Data Factories located in East US and filter by the selected names
+$AzureDataFactories = Get-AzDataFactoryV2 | Where-Object { $_.Location -eq 'eastus' -and $SelectedDataFactories -contains $_.DataFactoryName }
+
+# Display the selected Data Factories in East US
+$AzureDataFactories
+
+foreach ($AzureDataFactory in $AzureDataFactories) { 
+
+    $ResourceGroupName = $AzureDataFactory.ResourceGroupName
+    $DataFactoryName = $AzureDataFactory.DataFactoryName
+
+    $AzDataFactoryV2Triggers = Get-AzDataFactoryV2Trigger -ResourceGroupName $ResourceGroupName -DataFactoryName  $DataFactoryName
+
+    foreach ($AzDataFactoryV2Trigger in $AzDataFactoryV2Triggers) { 
+
+        if ($AzDataFactoryV2Trigger.RuntimeState -ne "Stopped") {
+            # Stop the trigger if it's currently running
+            Stop-AzDataFactoryV2Trigger -Name $AzDataFactoryV2Trigger.Name -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName -Force -Confirm:$false -Verbose
+            Write-Host "Stopped trigger:" $AzDataFactoryV2Trigger.Name "in" $DataFactoryName
+        }
+        else {
+            Write-Host $AzDataFactoryV2Trigger.Name "in" $DataFactoryName "is already stopped"
+        }
+    }
+}

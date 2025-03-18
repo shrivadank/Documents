@@ -1,0 +1,7 @@
+$(errorCount)
+if ($(errorCount) -eq 0) {
+    Write-Host "Logic App $logicAppName has been successfully disabled"
+}
+else {
+    throw "This is an intentional error"
+}

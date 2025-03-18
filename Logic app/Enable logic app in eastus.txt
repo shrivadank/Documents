@@ -1,0 +1,31 @@
+$logicAppList = Get-AzLogicApp | where {$_.location -eq 'eastus'}
+$errorCount = 0
+
+foreach ($logicApp in $logicAppList){
+    If($logicApp.State -eq 'Enabled'){
+        try {
+        $string = $logicapp.Id
+        $RgName= $string.Split("/")
+        Set-AzLogicApp -ResourceGroupName $RgName[4] -Name $logicapp.Name -State "Disabled" -Force -ErrorAction Stop
+        Write-Output "Logic App $logicApp.Name has been Disabled."
+        }
+        catch {
+        $errorCount++
+        $fileName = "error-log.txt"
+        $LA       = $logicapp.Name
+        $content = "$errorCount. An error occurred while disabling Logic App $LA with error message: $($_.Exception.Message)"
+        Add-Content $fileName -Value $content
+        }
+        if ($errorCount -eq 0) {
+        Write-Host "Logic App $logicAppName has been successfully disabled"                         
+        Write-Host "##vso[task.setvariable variable=errorcount]$errorCount"
+        }
+        else {
+        Write-Host "$errorCount errors occurred while disabling Logic App:" $logicapp.Name
+        Write-Host "##vso[task.setvariable variable=errorcount]$errorCount" 
+        }
+    }
+    else{
+        Write-Host "##vso[task.setvariable variable=errorcount]$errorCount"
+    }
+}

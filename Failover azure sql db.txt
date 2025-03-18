@@ -1,0 +1,33 @@
+try {
+    $targetSqlServers = @("store-notifications-prod-dbserver") 
+    
+    $sqlServers = Get-AzSqlServer | Where-Object { $targetSqlServers -contains $_.ServerName }
+ 
+    foreach ($sqlServer in $sqlServers) {
+        $failoverGroups = Get-AzSqlDatabaseFailoverGroup `
+            -ResourceGroupName $sqlServer.ResourceGroupName `
+            -ServerName $sqlServer.ServerName `
+            -ErrorAction Stop
+ 
+        # Check if the failover group exists
+        if ($failoverGroups -and $failoverGroups.FailoverGroupName -ne $null) {
+		
+            # Check if the primary location is NOT East US
+            if ($failoverGroups.ReadWriteEndpoint.PrimaryLocation -ne "East US") {
+                # Initiate failover on the secondary server
+                Switch-AzSqlDatabaseFailoverGroup `
+                    -ResourceGroupName "victra-sql-databases-rg" `
+                    -ServerName "victra-sql-dr-dbserver" `
+                    -FailoverGroupName $failoverGroups.FailoverGroupName `
+                    -ErrorAction Stop
+					
+                Write-Host "Switched Azure SQL Database primary server to West US for: $($sqlServer.ServerName)"
+            } else {
+                Write-Host "Primary is already set to East US for $($sqlServer.ServerName). No failover required."
+            }
+        }
+    }
+}
+catch {
+    Write-Host "Error switching Azure SQL Servers: $_.Exception.Message"
+}

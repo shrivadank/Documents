@@ -1,0 +1,21 @@
+try {
+    # Define the names of the two specific Function Apps you want to start
+    $functionAppNames = @("fn-tbv-welcome-email-prod-dr","fn-message-sender-prod-dr","fn-oracle-reports-prod-dr","fn-alert-ispu-create-prod-dr","fn-Truist-prod-dr","fn-immdevicereturnsxml-prod-dr","fn-immreturn-prod-dr","fn-dwn-ManageCustomerProfile-prod-dr","fn-GetInventoryAvailability-prod-dr","fn-TBVPurchaseOrders-prod-dr","Fn-VidaPayGetPOStatus-prod-dr","Fn-TBVAssignUnassignStores-prod-dr","fn-eargo-prod-dr")
+
+    # Retrieve the Function Apps in westus that match the specified names
+    $functionApps = Get-AzFunctionApp | Where-Object {
+        ($_.location -eq "westus" -or $_.location -eq "West US") -and ($functionAppNames -contains $_.Name)
+    }
+
+    # Start each specified function app
+    foreach ($functionApp in $functionApps) {
+        Start-AzFunctionApp -Name $functionApp.Name -ResourceGroupName $functionApp.ResourceGroupName
+        Write-Host "Started Function App: $($functionApp.Name)"
+    }
+
+    Write-Host "Selected Azure Functions started successfully."
+
+} catch {
+    Write-Host "Error starting Azure Functions:"
+    Write-Host $_.Exception.Message
+}
