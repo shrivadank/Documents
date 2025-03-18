@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "WORKFLOWS_SUBSCRIPTION_ID": "",
+    "serviceBus_connectionString": "Endpoint=sb://shri-sb1309.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=XSO6KgPxgFk2clBhJB5BJz+PwsOZLKq1NzfGqiUQp20="
+  }
+}
