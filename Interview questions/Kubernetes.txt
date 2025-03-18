@@ -1,0 +1,15 @@
+1.K8 scaling fundamentals.
+2.How external secrets works in k8
+3.application sitting on VM running on IIS, and AKS cluster in backend, LB in front, how the traffic is routed with in k8, if i want to route traffic based on confg paths, How can this be done 
+4.In AKS, if I want to monitor the pods,
+5.how to debug ingress controller if it gives 500 error
+6.Explain Ingress controller
+7.What is k8s?
+8.How to change env var in Kubernetes without using deployment
+9.Application permission in Kubernetes
+10.pod is running and how to change env var dynamically
+11.what is Kubernetes sops?
+12.docker and k8s how work parallel
+13.secrets manage in aks
+14.how to change env var in k8s
+15.how to change env var in k8s dynamically

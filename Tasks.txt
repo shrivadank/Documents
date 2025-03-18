@@ -1,0 +1,15 @@
+Azure vm start and stop using function app 
+
+1.Rest Api
+
+create vm
+create function app
+in vm give contribitor role for function app
+go to function app identity and assign system assign
+add function htttp trigger 
+code+test write code
+app files changes
+
+----------------------------------------------------------------------
+
+sql server express

@@ -1,0 +1,7 @@
+1.Terraform allows import function and scenario based question on tf
+2.terraform modules
+3.terraform commands1.
+4.Explain terraform directory structure.
+5.how you can update terraform resources
+6.what is tfvars file
+7.what will happen if you update any resource from azure portal and then run terraform plan commnad?

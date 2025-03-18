@@ -1,0 +1,5 @@
+1.Docker Daemon is not running then how to troubleshoot?
+2.Docker Volume
+3.Docker inspect volume
+4.docker and k8s how work parallel
+5.image is not pull then how to troubleshoot

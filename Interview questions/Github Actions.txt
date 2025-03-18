@@ -1,0 +1,7 @@
+can we run parallel pipeline in github actions
+parallel pipeline in github action or job
+Explain ci cd pipeline
+Security in pipelines
+Github secrets
+how to check vulnerability in ci cd pipeline ans snyk and trivy tools
+Build command in github action

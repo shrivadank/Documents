@@ -1,0 +1,255 @@
+
+how to debug web application on Azure system  
+how to do this Difference between NSG and AZ firewall.
+how to create azure vm
+four microservices depends on each other then how to communicate with each other  and how to check it will work or not?
+Application in rest api how to work and communicate
+Application Migration
+Which tools using for monitoring
+*****************************************************************************************************************************************************
+
+1. What is Azure DevOps?
+Azure DevOps is a cloud-based DevOps platform by Microsoft that provides services for managing the entire software development lifecycle, including:
+
+Azure Repos: Version control.
+Azure Pipelines: CI/CD.
+Azure Boards: Agile planning and tracking.
+Azure Test Plans: Testing and quality assurance.
+Azure Artifacts: Package management.
+
+2. What is CI/CD, and how does Azure DevOps support it?
+Continuous Integration (CI): Automates code integration, builds, and testing to identify errors early.
+Continuous Deployment (CD): Automates deployment to staging/production environments.
+Azure Pipelines in Azure DevOps supports CI/CD by providing build and release pipelines that can integrate with various source control systems and deploy to different environments.
+
+3. What is a build pipeline in Azure DevOps?
+A build pipeline automates the process of compiling, testing, and packaging code into an artifact. It ensures that code changes are validated before merging.
+
+4. What are Azure Repos?
+Azure Repos is a Git-based version control system in Azure DevOps that allows collaboration on code repositories.
+Key features:
+Supports both Git and TFVC (Team Foundation Version Control).
+Enables pull requests, branch policies, and code reviews.
+
+5. What are the main components of Azure DevOps?
+Azure Boards: Work tracking (Agile, Scrum, Kanban).
+Azure Repos: Git repositories and version control.
+Azure Pipelines: CI/CD automation.
+Azure Test Plans: Testing and QA tools.
+Azure Artifacts: Package management.
+
+
+**what is paas iaas saas
+
+Iaas
+the cloud provider manages hardware.
+provides virtual machines, storage, and networking on demand.
+You manage the OS, applications, and middleware, 
+e.g.Azure Virtual Machines (VMs)
+
+PaaS
+develop, test, and deploy applications without managing infrastructure.
+The cloud provider manages servers, OS, runtime, and databases.
+e.g. Azure App Service
+
+SaaS provides ready-to-use applications over the internet.
+Users don’t manage servers, storage, or updates.
+e.g. Gmail
+
+
+**Public cloud
+It’s available to anyone who wants to use it.
+The resources (like servers, storage) are shared among multiple customers, 
+but your data is secure and isolated.
+e.g. Azure
+
+Private cloud
+A private cloud is dedicated to a single organization. 
+It can be hosted on-premises (at your office) or by a third-party provider, but only you use the resources.
+
+Hybrid cloud
+A hybrid cloud combines both public and private clouds.
+Organizations can use the private cloud for sensitive operations and the public cloud for less critical tasks.
+e.g. Netflix
+**********************************************************************************************************
+Intermediate Level:
+
+6. How do you implement branch policies in Azure Repos?
+Branch policies ensure code quality by requiring:
+
+Code reviews: Mandatory approvers for pull requests.
+Build validation: Linked pipelines must pass before merging.
+Work item linking: Requires linking commits to work items.
+Comment resolution: All PR comments must be addressed.
+
+7. What are agent pools in Azure DevOps?
+Agent pools are groups of agents that run your build and release pipelines. Agents can be Microsoft-hosted or self-hosted.
+
+Self-hosted agents allow:
+
+Custom tools and environments.
+Better control over scaling and maintenance.
+
+Microsoft-hosted agents have a maximum runtime of 6 hours per job.
+If your jobs require more time, you should use self-hosted agents, which do not have runtime restrictions.
+
+8. How do you secure Azure DevOps pipelines?
+Use service connections with minimal privileges.
+Implement secrets management (e.g., Azure Key Vault).
+Restrict pipeline triggers to specific branches.
+Use approval gates for deployments.
+
+9. What are service connections in Azure DevOps?
+Service connections are configurations that enable Azure DevOps pipelines to connect to external services (e.g., Azure, AWS, Docker Hub). They store authentication details securely.
+
+10. What is YAML, and how is it used in Azure Pipelines?
+YAML (YAML Ain't Markup Language) is a human-readable configuration language used for defining pipelines in Azure DevOps.
+
+Example YAML pipeline:
+
+yaml
+Copy
+Edit
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo "Hello, Azure DevOps!"
+  displayName: "Print Message"
+
+***************************************************************************************************
+Advanced Level:
+
+11. How do you manage infrastructure using Azure DevOps?
+Use Infrastructure as Code (IaC) tools like Terraform, ARM templates, or Bicep.
+Automate deployments with Azure Pipelines.
+Store templates in Azure Repos and use pipelines for provisioning resources.
+
+12. How do you implement multi-stage pipelines in Azure DevOps?
+Multi-stage pipelines define multiple stages (e.g., build, test, deploy) within a single pipeline using YAML.
+
+Example YAML multi-stage pipeline:
+
+yaml
+Copy
+Edit
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+    - script: echo "Building the application"
+
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    steps:
+    - script: echo "Deploying the application"
+
+13. How do you set up a pipeline to deploy to Azure Kubernetes Service (AKS)?
+Use a YAML pipeline.
+Add steps to:
+Build a Docker image.
+Push it to Azure Container Registry (ACR).
+Deploy to AKS using kubectl or Helm.
+
+14. What are approval gates in Azure DevOps?
+Approval gates are manual or automated checks that must be passed before moving to the next stage in a release pipeline. Examples include:
+
+Waiting for manager approval.
+Running security or quality checks.
+
+15. How do you integrate Azure DevOps with third-party tools?
+Use service hooks to trigger actions in tools like Slack, Jenkins, or GitHub.
+Install extensions from the Azure DevOps marketplace.
+
+*************************************************************************************************************
+Scenario-Based Questions:
+
+16. How would you troubleshoot a failed pipeline?
+Review pipeline logs for errors.
+Verify configurations (e.g., YAML syntax, variable values).
+Check service connection authentication.
+Reproduce the error locally for debugging.
+
+17. How do you handle secrets in Azure DevOps?
+Use Azure Key Vault or pipeline variables marked as secret.
+Avoid storing secrets directly in code or YAML files.
+
+18. How do you implement blue-green deployment in Azure Pipelines?
+Deploy the new version to a staging environment (Blue).
+Test and validate it.
+Switch traffic to the new environment.
+
+19. How do you scale DevOps agents for large teams?
+Use self-hosted agent pools with autoscaling (e.g., Azure VMs or Kubernetes).
+Leverage parallel jobs with Microsoft-hosted agents.
+
+20. How do you manage dependencies in Azure Artifacts?
+Publish and consume packages using Azure Artifacts feeds.
+Use upstream sources for external dependencies like NuGet, npm, or Maven.
+
+
+*************************************************************************************************************************
+
+--How to Connect an Azure VM through Point-to-Site VPN with a Private IP Address?
+
+Create a Virtual Network (VNet)
+Create a Gateway Subnet
+Create a Virtual Network Gateway
+Configure Point-to-Site VPN
+
+
+Ensure VM has a private IP (found in Networking tab of the VM)
+Make sure VPN Connection is active on your local machine
+Check NSG rules to allow RDP (3389) or SSH (22) within the VNet
+Ensure Routing Table allows traffic from P2S IP range to VNet
+
+
+--How to Connect to an Azure VM Using Azure Firewall with a Private IP Address?
+
+Create a Virtual Network (VNet)
+Create and Configure Azure Firewall
+Configure NAT Rule for Remote Access
+Configure Route Table for VM Subnet
+
+--How to connect an Azure VM with the help of Azure Bastion service.
+
+No Public IP on VM – Fully private
+Direct Browser Access – No need for a VPN or remote desktop client
+More Secure – Protects against brute force attacks
+
+--Azure disaster recovery from one region to another.
+
+--Benefits of DevOps Lifecycle
+✔ Faster software delivery
+✔ Improved collaboration between teams
+✔ Increased automation and efficiency
+✔ Enhanced security and compliance
+
+
+--DevOps Lifecycle
+
+plan
+Development
+Build
+test
+relese
+Deploy
+Monitor
+
+
+--Blue-Green Deployment is a deployment strategy aimed at reducing downtime and risk by running two identical production environments, 
+referred to as the Blue environment and the Green environment. 
+One of the environments (usually Blue) is live, while the other (Green) is used for staging and testing new features.
+
+Benefits of Blue-Green Deployment
+✔ Zero Downtime
+✔ Easy Rollback 
+✔ Risk Mitigation 
+✔ Simplifies Testing 

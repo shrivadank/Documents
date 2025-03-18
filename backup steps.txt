@@ -1,0 +1,190 @@
+
+1. generate SAS token  in container.
+
+sp=racwl&st=2023-07-25T12:32:44Z&se=2023-08-31T20:32:44Z&sv=2022-11-02&sr=c&sig=froivX08EJP1OxzaXRrFG5aUjOvmAB%2FoRL8N7xs3aPI%3D
+
+2. add it in secrets and use replace var or token  task to replace SAS token in script .
+
+
+3. setup sqlcmd on runner and add it to env var path using workflow
+
+4. execute script using sqlcmd on master database in your current mssql instance(it could be in azure or local)
+
+
+5. take backup of database using same command for backup lastly we have used but give url of container.
+
+
+task is done ciao adios bye bye. 
+
+ 
+https://misstorageacc.blob.core.windows.net/sqlbackup?si=backup&sv=2022-11-02&sr=c&sig=nuQMcjw9Sp55FX4PS3%2BjDgbj5wBMhDRMzEEW%2B9Tx8N0%3D
+
+
+
+
+on: workflow_dispatch
+
+jobs:
+  backup-and-restore:
+    runs-on: windows-latest
+   
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cschleiden/replace-tokens@v1
+      with:
+       tokenPrefix: __
+       tokenSuffix: __
+       files: '["**/*.sql"]'
+      env:
+         SAS_TOKEN: ${{secrets.SAS_TOKEN}}
+         
+         
+    - name: Install winget
+      uses: Cyberboss/install-winget@v1
+
+    - name: install sqlcmd
+      run: |
+           winget install sqlcmd --accept-package-agreements --accept-source-agreements  --silent    
+      
+           
+    - name: Backup database 
+      run: |
+          Sqlcmd -S ${{ vars.ORG_MIS_SQLSERVER_NAME }} -U ${{ vars.ORG_MIS_SQLSERVER_USERNAME }} -P ${{ secrets.ORG_MIS_SQLSERVER_PASSWORD }} -d ${{ vars.DATABASE_NAME }} -Q "BACKUP DATABASE [${{ vars.DATABASE_NAME }}] TO URL='https://misstorageacc.blob.core.windows.net/sqlbackup/${{ vars.DATABASE_NAME}}.bak'"
+      shell: cmd  
+
+
+
+
+
+*************************
+
+on: workflow_dispatch
+
+jobs:
+  backup-and-restore:
+    runs-on: windows-latest
+   
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: cschleiden/replace-tokens@v1
+      with:
+        tokenPrefix: __
+        tokenSuffix: __
+        files: '["**/*.sql"]'
+      env:
+        SAS_TOKEN: ${{secrets.SAS_TOKEN}}
+         
+    - name: Install winget
+      uses: Cyberboss/install-winget@v1
+
+    - name: Install sqlcmd
+      run: |
+        winget install sqlcmd --accept-package-agreements --accept-source-agreements --silent
+      
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+          creds: ${{ secrets.ORG_AZURE_CREDENTIALS }}
+      
+    - name: Backup database
+      run: |
+        Sqlcmd -S ${{ vars.ORG_MIS_SQLSERVER_NAME }} -U ${{ vars.ORG_MIS_SQLSERVER_USERNAME }} -P ${{ secrets.ORG_MIS_SQLSERVER_PASSWORD }} -d ${{ vars.DATABASE_NAME }} -Q "BACKUP DATABASE [${{ vars.DATABASE_NAME }}] TO URL='https://misstorageacc.blob.core.windows.net/sqlbackup/${{ vars.DATABASE_NAME}}.bak'"
+      shell: cmd  
+
+    - name: Check backup file
+      run: |
+        echo "Listing files in storage container"
+        az storage blob list --account-name misstorageacc --container-name sqlbackup --query '[].name'
+      env:
+        AZURE_STORAGE_CONNECTION_STRING: ${{secrets.AZURE_STORAGE_CONNECTION_STRING}}
+      shell: bash
+
+
+
+
+*****************************
+
+
+
+on: workflow_dispatch
+
+jobs:
+  backup-and-restore:
+    runs-on: windows-latest
+   
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: cschleiden/replace-tokens@v1
+      with:
+        tokenPrefix: __
+        tokenSuffix: __
+        files: '["**/*.sql"]'
+      env:
+        SAS_TOKEN: ${{secrets.SAS_TOKEN}}
+         
+    - name: Install winget
+      uses: Cyberboss/install-winget@v1
+
+    - name: Install sqlcmd
+      run: |
+        winget install sqlcmd --accept-package-agreements --accept-source-agreements --silent
+      
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+           creds: ${{ secrets.ORG_AZURE_CREDENTIALS }}
+      
+    - name: master script execution
+      run: |
+           sqlcmd -S 20.207.67.65  -d master -i "sql-script.sql" -U sa -P cybage@123  -C
+      shell: cmd
+    
+    - name: backup
+      run: |
+           sqlcmd -S 20.207.67.65 -d master -Q "BACKUP DATABASE [Mis.Services.Customer.Database] TO  URL = 'misstore.blob.core.windows.net/sql-backup/Mis.Services.Customer.Database.bak' WITH  COPY_ONLY, CHECKSUM, FORMAT, MAXTRANSFERSIZE=4194304;" -U sa -P cybage@123 -C
+    ************************
+
+
+name: SQL Backup
+on: workflow_dispatch
+
+jobs:
+  backup-and-restore:
+    runs-on: windows-latest
+   
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: cschleiden/replace-tokens@v1
+      with:
+        tokenPrefix: __
+        tokenSuffix: __
+        files: '["**/*.sql"]'
+      env:
+        SAS_TOKEN: ${{secrets.SAS_TOKEN}}
+         
+    - name: Install winget
+      uses: Cyberboss/install-winget@v1
+
+    - name: Install sqlcmd
+      run: |
+        winget install sqlcmd --accept-package-agreements --accept-source-agreements --silent
+      
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+           creds: ${{ secrets.ORG_AZURE_CREDENTIALS }}
+      
+    - name: master script execution
+      run: |
+           sqlcmd -S 4.224.148.6  -d master -i "sql-script.sql" -U sa -P cybage@123  -C
+      shell: cmd
+    
+    - name: backup
+
+
+      run: |
+           sqlcmd -S 4.224.148.6 -d master -U sa -P cybage@123 -Q "BACKUP DATABASE [Mis.Services.Customer.Database] TO  URL = 'https://misstore.blob.core.windows.net/sql-backup/Mis.Services.Customer.Database.bak' WITH  COPY_ONLY, FORMAT, MAXTRANSFERSIZE=4194304;"  -C
+ 
