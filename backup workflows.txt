@@ -1,0 +1,177 @@
+  call-workflow1:
+    uses: cybagedevops/mis-iac/.github/workflows/reusable_restore.yml@main
+    with:
+          database_name: ${{ inputs.DATABASE.NAME }}
+    secrets:
+          SQL_SERVER_PASSWORD: ${{ secrets.SQL_SERVER_PASSWORD }}
+          SQL_SERVER_USERNAME: ${{ secrets.SQL_SERVER_USERNAME }}
+
+
+
+
+
+
+
+
+name: SQL Server Backup
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Connect to SQL Server
+        run: |
+          mssql-scripter script -S your-sql-server-name -d your-database-name -U ${{ secrets.SQL_SERVER_USERNAME }} -P ${{ secrets.SQL_SERVER_PASSWORD }} --file-path backup.sql
+
+      - name: Take SQL Server Backup
+        run: |
+          az storage blob upload --account-name your-storage-account-name --container-name your-container-name --name backup.sql --type block --source backup.sql
+
+
+
+**************************************************
+
+sp=racwl&st=2023-06-23T07:38:43Z&se=2024-03-05T15:38:43Z&sip=0.0.0.0&sv=2022-11-02&sr=c&sig=0h2c4jGy2ZwTZMNwd6uTfqusSax3Bgb0dvqilIL3G0w%3D
+
+https://storagemis.blob.core.windows.net/miscontainer?sp=racwl&st=2023-06-23T07:38:43Z&se=2024-03-05T15:38:43Z&sip=0.0.0.0&sv=2022-11-02&sr=c&sig=0h2c4jGy2ZwTZMNwd6uTfqusSax3Bgb0dvqilIL3G0w%3D
+
+
+
+name: Database Backup
+
+on:
+  schedule:
+    - cron: "0 18 * * *"
+
+
+env:
+  AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+  AZURE_STORAGE_ACCESS_KEY: ${{ secrets.AZURE_STORAGE_ACCESS_KEY }}
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Install Azure CLI extension for Azure SQL
+        run: az extension add --name sql
+
+      - name: Create SQL Server database backup
+        run: |
+          export BACKUP_FILENAME=database_backup_$(date +"%Y%m%d%H%M%S").bak
+          az sql db export \
+            --server <your_sql_server_name>.database.windows.net \
+            --name <your_database_name> \
+            --storage-uri "https://${{ env.AZURE_STORAGE_ACCOUNT }}.blob.core.windows.net/container/${BACKUP_FILENAME}" \
+            --storage-key ${{ env.AZURE_STORAGE_ACCESS_KEY }}
+
+      - name: Display backup URL
+        run: |
+          echo "Database backup created."
+          echo "Backup URL: https://${{ env.AZURE_STORAGE_ACCOUNT }}.blob.core.windows.net/container/${BACKUP_FILENAME}"
+
+*****************************************************
+
+
+
+sqldnslabel.centralindia.cloudapp.azure.com
+
+
+
+
+      - name: Setup SQL Server
+        uses: azure/setup-sql-server@v1
+        with:
+          server-name: sqldnslabel.centralindia.cloudapp.azure.com
+          admin-user: saurabh
+          admin-password: saurabh@123
+
+
+
+
+  schedule:
+    - cron: "0 18 * * *"
+
+*******************************************************
+
+
+
+name: SQL Backup and Restore to Azure Blob Storage
+
+on: workflow_dispatch
+
+
+jobs:
+  backup_and_restore:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+
+
+      - name: Backup SQL Database
+        run: |
+          sqlcmd -S sqldnslabel.centralindia.cloudapp.azure.com -U saurabh -P saurabh@123 -Q "BACKUP DATABASE Mis.Services.Customer.Database TO DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\*'"
+     
+      - name: Take SQL Server Backup
+        run: |
+          az storage blob upload --account-name storagemis --container-name miscontainer C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\*'
+      - name: Restore SQL Database
+        run: |
+          sqlcmd -S <SQL_SERVER_NAME> -U <SQL_SERVER_ADMIN_USER> -P <SQL_SERVER_ADMIN_PASSWORD> -Q "RESTORE DATABASE <DATABASE_NAME> FROM DISK = '/var/opt/mssql/backup/<DATABASE_NAME>.bak'"
+
+
+
+
+
+
+
+***********************************************************************
+
+
+
+
+name: SQL Backup and Restore to Azure Blob Storage
+on: workflow_dispatch
+
+jobs:
+  backup_and_restore:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Backup SQL Database
+        run: |
+          sqlcmd -S sqldnslabel.centralindia.cloudapp.azure.com -U saurabh -P saurabh@123 -Q "BACKUP DATABASE Mis.Services.Customer.Database TO DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\*'"
+     
+      - name: Take SQL Server Backup
+        run: |
+          
+          while IFS= read -r -d '' file; do
+            az storage blob upload --account-name storagemis --container-name miscontainer --type block --name "$(basename "$file")" --type block --source "$file"
+          done < <(find "C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup" -type f -print0)
+      - name: Restore SQL Database
+        run: |
+          sqlcmd -S sqldnslabel.centralindia.cloudapp.azure.com -U saurabh -P saurabh@123 -Q "RESTORE DATABASE Mis.Services.Customer.Database FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\*'"
