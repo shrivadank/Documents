@@ -1,0 +1,375 @@
+Message-ID: <2057933514.5.1737980003160@57d6a33fc5c4>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_4_1437284188.1737980003159"
+
+------=_Part_4_1437284188.1737980003159
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Azure Cloud</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        font-size: 10pt;
+        line-height: 1.2;
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: var(--ds-surface, #fff) !important;
+        color: var(--ds-text, #000) !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: var(--ds-text, #000);
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        page-break-after: avoid;
+    }
+
+    pre {
+        font-family: Monaco, "Courier New", monospace;
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Azure Cloud</h1>
+    <div class=3D"Section1">
+        <ul class=3D"childpages-macro">
+<li><a href=3D"/wiki/spaces/EN/pages/1235648611/Azure+-+Standards+Guideline=
+s+Best+Practices" data-linked-resource-id=3D"1235648611" data-linked-resour=
+ce-version=3D"13" data-linked-resource-type=3D"page">Azure - Standards, Gui=
+delines &amp; Best Practices</a>
+<ul class=3D"childpages-macro">
+<li><a href=3D"/wiki/spaces/EN/pages/1237123099/Teams+-+Azure+Infrastructur=
+e+Catalog" data-linked-resource-id=3D"1237123099" data-linked-resource-vers=
+ion=3D"1" data-linked-resource-type=3D"page">Teams - Azure Infrastructure C=
+atalog</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/430866723/Azure+Resource+Naming+Conven=
+tion+Tagging" data-linked-resource-id=3D"430866723" data-linked-resource-ve=
+rsion=3D"17" data-linked-resource-type=3D"page">Azure Resource Naming Conve=
+ntion &amp; Tagging</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2133393419/Azure+App+Service+Plan+-+Be=
+st+Practices" data-linked-resource-id=3D"2133393419" data-linked-resource-v=
+ersion=3D"5" data-linked-resource-type=3D"page">Azure App Service Plan - Be=
+st Practices</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/466518262/Azure+Resource+Group+Strateg=
+y" data-linked-resource-id=3D"466518262" data-linked-resource-version=3D"3"=
+ data-linked-resource-type=3D"page">Azure Resource Group Strategy</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2033975350/Azure+Cost+Analysis+FA+LA+D=
+F" data-linked-resource-id=3D"2033975350" data-linked-resource-version=3D"8=
+" data-linked-resource-type=3D"page">Azure Cost Analysis FA/LA/DF</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2478407682/Function+App+-+Best+Practic=
+es" data-linked-resource-id=3D"2478407682" data-linked-resource-version=3D"=
+5" data-linked-resource-type=3D"page">Function App - Best Practices</a></li=
+>
+<li><a href=3D"/wiki/spaces/EN/pages/2498723841/Function+App+-+Hosting+Plan=
++Strategy+-+App+Service+Dedicated+Plan+vs+Consumption+Plan" data-linked-res=
+ource-id=3D"2498723841" data-linked-resource-version=3D"7" data-linked-reso=
+urce-type=3D"page">Function App - Hosting Plan Strategy - App Service (Dedi=
+cated) Plan vs Consumption Plan</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/1939931339/Setup+Azure+Storage+Lifecyc=
+le+Management" data-linked-resource-id=3D"1939931339" data-linked-resource-=
+version=3D"1" data-linked-resource-type=3D"page">Setup Azure Storage Lifecy=
+cle Management</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/556433549/Azure+NSG+Network+Security+G=
+roups" data-linked-resource-id=3D"556433549" data-linked-resource-version=
+=3D"1" data-linked-resource-type=3D"page">Azure NSG (Network Security Group=
+s)</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2482143253/VNETs+Subnet+creation" data=
+-linked-resource-id=3D"2482143253" data-linked-resource-version=3D"2" data-=
+linked-resource-type=3D"page">VNETs &amp; Subnet creation</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/3217227789/Custom+Domain+Standardizati=
+on+for+Applications" data-linked-resource-id=3D"3217227789" data-linked-res=
+ource-version=3D"3" data-linked-resource-type=3D"page">Custom Domain Standa=
+rdization for Applications</a></li>
+</ul></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2480308226/Disaster+Recovery+of+apps+s=
+ervices+hosted+on+Azure" data-linked-resource-id=3D"2480308226" data-linked=
+-resource-version=3D"1" data-linked-resource-type=3D"page">Disaster Recover=
+y of apps/services hosted on Azure</a>
+<ul class=3D"childpages-macro">
+<li><a href=3D"/wiki/spaces/EN/pages/2911895756/Victra+Disaster+Recovery+St=
+rategy" data-linked-resource-id=3D"2911895756" data-linked-resource-version=
+=3D"1" data-linked-resource-type=3D"page">Victra Disaster Recovery Strategy=
+</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/1898577946/DR+Strategy+Implementation+=
+Steps+for+Apps+Services+on+Azure" data-linked-resource-id=3D"1898577946" da=
+ta-linked-resource-version=3D"13" data-linked-resource-type=3D"page">DR Str=
+ategy &amp; Implementation Steps for Apps/Services on Azure</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2212987016/Steps+to+failover+failback+=
+individual+Azure+Services+to+DR+region+-+Partial+Failover" data-linked-reso=
+urce-id=3D"2212987016" data-linked-resource-version=3D"4" data-linked-resou=
+rce-type=3D"page">Steps to failover &amp; failback individual Azure Service=
+s to DR region - Partial Failover</a></li>
+</ul></li>
+<li><a href=3D"/wiki/spaces/EN/pages/493846613/Azure+Access" data-linked-re=
+source-id=3D"493846613" data-linked-resource-version=3D"1" data-linked-reso=
+urce-type=3D"page">Azure Access</a>
+<ul class=3D"childpages-macro">
+<li><a href=3D"/wiki/spaces/EN/pages/514261026/Granting+Access" data-linked=
+-resource-id=3D"514261026" data-linked-resource-version=3D"2" data-linked-r=
+esource-type=3D"page">Granting Access</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/560660493/Azure+Key+Vaults" data-linke=
+d-resource-id=3D"560660493" data-linked-resource-version=3D"3" data-linked-=
+resource-type=3D"page">Azure Key Vaults</a></li>
+</ul></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2054717449/Showing+Under+Maintenance+P=
+age+-+Vision+Outage+Release" data-linked-resource-id=3D"2054717449" data-li=
+nked-resource-version=3D"2" data-linked-resource-type=3D"page">Showing "Und=
+er Maintenance Page" - Vision Outage/Release</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2422603800/Generate+DotNet+config+file=
+s+for+local+development" data-linked-resource-id=3D"2422603800" data-linked=
+-resource-version=3D"1" data-linked-resource-type=3D"page">Generate DotNet =
+config files for local development</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2482143234/Integration+with+external+a=
+pps" data-linked-resource-id=3D"2482143234" data-linked-resource-version=3D=
+"1" data-linked-resource-type=3D"page">Integration with external apps</a>
+<ul class=3D"childpages-macro">
+<li><a href=3D"/wiki/spaces/EN/pages/2482077730/Datascape+Ingram" data-link=
+ed-resource-id=3D"2482077730" data-linked-resource-version=3D"1" data-linke=
+d-resource-type=3D"page">Datascape &amp; Ingram</a></li>
+</ul></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2481881107/How+to" data-linked-resourc=
+e-id=3D"2481881107" data-linked-resource-version=3D"1" data-linked-resource=
+-type=3D"page">How to:</a>
+<ul class=3D"childpages-macro">
+<li><a href=3D"/wiki/spaces/EN/pages/2482143312/Re-create+vision-prod-mi" d=
+ata-linked-resource-id=3D"2482143312" data-linked-resource-version=3D"1" da=
+ta-linked-resource-type=3D"page">Re-create vision-prod-mi</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/451412034/API+Management" data-linked-=
+resource-id=3D"451412034" data-linked-resource-version=3D"26" data-linked-r=
+esource-type=3D"page">API Management</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/517832711/Adding+a+Subnet+In+Azure" da=
+ta-linked-resource-id=3D"517832711" data-linked-resource-version=3D"1" data=
+-linked-resource-type=3D"page">Adding a Subnet In Azure</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2943156248/Enable+Request+Response+Bod=
+y+Logging+in+API+Management" data-linked-resource-id=3D"2943156248" data-li=
+nked-resource-version=3D"2" data-linked-resource-type=3D"page">Enable Reque=
+st / Response Body Logging in API Management</a></li>
+</ul></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2638544985/Tagging+Azure+Resources" da=
+ta-linked-resource-id=3D"2638544985" data-linked-resource-version=3D"1" dat=
+a-linked-resource-type=3D"page">Tagging Azure Resources</a>
+<ul class=3D"childpages-macro">
+<li><a href=3D"/wiki/spaces/EN/pages/2638544998/Tagged+and+Untagged+Resourc=
+e+Groups" data-linked-resource-id=3D"2638544998" data-linked-resource-versi=
+on=3D"24" data-linked-resource-type=3D"page">Tagged and Untagged Resource G=
+roups</a></li>
+</ul></li>
+<li><a href=3D"/wiki/spaces/EN/pages/2828894210/Azure+Cost+Savings+-+2024" =
+data-linked-resource-id=3D"2828894210" data-linked-resource-version=3D"13" =
+data-linked-resource-type=3D"page">Azure Cost Savings - 2024</a>
+<ul class=3D"childpages-macro">
+<li><a href=3D"/wiki/spaces/EN/pages/2835939329/Consolidation+of+Azure+SQL+=
+DBs+in+Common+Database+Server+in+DEV+Subscription" data-linked-resource-id=
+=3D"2835939329" data-linked-resource-version=3D"21" data-linked-resource-ty=
+pe=3D"page">Consolidation of Azure SQL DBs in Common Database Server in DEV=
+ Subscription</a></li>
+<li><a href=3D"/wiki/spaces/EN/pages/3180101672/Disable+Azure+SQL+Server+Da=
+tabase+with+migrated+to+common+db+server" data-linked-resource-id=3D"318010=
+1672" data-linked-resource-version=3D"18" data-linked-resource-type=3D"page=
+">Disable Azure SQL Server/Database with migrated to common db server</a></=
+li>
+</ul></li>
+</ul>
+    </div>
+</body>
+</html>
+------=_Part_4_1437284188.1737980003159--

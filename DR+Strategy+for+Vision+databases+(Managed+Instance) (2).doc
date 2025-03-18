@@ -1,0 +1,366 @@
+Message-ID: <146829727.25.1737981299985@c6e858f22103>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_24_182750781.1737981299985"
+
+------=_Part_24_182750781.1737981299985
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>DR Strategy for Vision databases (Managed Instance)</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        font-size: 10pt;
+        line-height: 1.2;
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: var(--ds-surface, #fff) !important;
+        color: var(--ds-text, #000) !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: var(--ds-text, #000);
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        page-break-after: avoid;
+    }
+
+    pre {
+        font-family: Monaco, "Courier New", monospace;
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>DR Strategy for Vision databases (Managed Instance)</h1>
+    <div class=3D"Section1">
+        <p></p>
+<p>All Vision databases in PROD are hosted on <strong>vision-prod-mi</stron=
+g>, SQL Managed Instance on Azure. This instance exists in Azure East US re=
+gion, which is the primary region for all Victra deployments.</p>
+<p>A Managed Instance named <strong>vision-prod-mi-dr </strong>has been cre=
+ated in <strong>Azure West US </strong>region. <em>vision-prod-mi </em>and =
+<em>vision-prod-mi-dr </em>have been added to <strong>one Failover group</s=
+trong>, with vision-prod-mi being marked as primary. All data in vision-pro=
+d-mi is being replicated to vision-prod-mi-dr. vision-prod-mi acts as prima=
+ry database, where all reads and writes will occur, while vision-prod-mi-dr=
+ is the secondary server. Secondary instance is a read-only instance.</p>
+<p><strong>Vision Primary Database Server:</strong> vision-prod-mi (East US=
+)</p>
+<p><strong>Vision Secondary Database Server:</strong> vision-prod-mi-dr (We=
+st US)</p>
+<p>In case of <strong>regional outage</strong> in the <strong>East US</stro=
+ng>, we need to <strong>initiate manual failover </strong>of this failover =
+group. On failover, <span class=3D"inline-comment-marker" data-ref=3D"b1fb6=
+137-f243-41a1-913c-106e59d6b190">the secondary instance (vision-prod-mi-dr)=
+</span> will become primary instance. All reads and writes will be directed=
+ to the new DR instance. It will not have any secondary at that time becaus=
+e of unavailability of East US region. But when East US region becomes oper=
+ational, all data from vision-prod-mi-dr will get replicated to vision-prod=
+-mi. Once entire East US site is ready, initiate manual failover again. Thi=
+s will make vision-prod-mi as the primary instance.</p>
+<h2 id=3D"DRStrategyforVisiondatabases(ManagedInstance)-DataReplication">Da=
+ta Replication</h2>
+<ol start=3D"1">
+<li>
+<p>All transactional data flowing in vision-prod-mi is getting replicated t=
+o vision-prod-mi-dr in async manner.</p></li>
+<li>
+<p>Replication is automatically configured for all the databases that exist=
+ on vision-prod-mi.</p></li>
+</ol>
+<h3 id=3D"DRStrategyforVisiondatabases(ManagedInstance)-DatathatdoesNOTgetr=
+eplicated">Data that does NOT get replicated</h3>
+<ol start=3D"1">
+<li>
+<p>Server Level objects such as Logins, Linked Servers,<span class=3D"inlin=
+e-comment-marker" data-ref=3D"8b981800-f08a-4a82-a109-a02e30d148fa"> SQL JO=
+BS do NOT get replicated. They MUST be created manually on secondary MI.</s=
+pan></p></li>
+<li>
+<p>Logins</p>
+<ol start=3D"1">
+<li>
+<p>All Logins on vision-prod-mi are exported to Blob storage on daily basis=
+. The DevOps pipeline created to failover vision-prod-mi to DR region creat=
+es all Logins on vision-prod-mi-dr using the script saved on Blob storage b=
+efore failing over the Db server. So, the process to sync Logins has been a=
+utomated.</p></li>
+</ol></li>
+<li>
+<p>Security =E2=86=92 Credentials</p>
+<ol start=3D"1">
+<li>
+<p>All Credentials existing on vision-prod-mi MUST be created manually on s=
+econdary MI</p></li>
+<li>
+<p>Any new credentials being created on vision-prod-mi MUST also be created=
+ on secondary MI</p></li>
+</ol></li>
+<li>
+<p>Linked Servers</p>
+<ol start=3D"1">
+<li>
+<p>All existing Linked Servers as of 26th June, 2022 have been created on s=
+econdary MI</p></li>
+<li>
+<p><span class=3D"inline-comment-marker" data-ref=3D"4dbd4999-bbe3-4339-be9=
+9-774f0c1d71c9">If any new Linked Server is created on vision-prod-mi then =
+it must also be created on secondary MI</span></p></li>
+</ol></li>
+<li>
+<p>SQL JOBS</p>
+<ol start=3D"1">
+<li>
+<p>All SQL JOBS running on vision-prod-mi MUST be created manually on secon=
+dary MI post failover</p></li>
+<li>
+<p><span class=3D"inline-comment-marker" data-ref=3D"196404f2-1ce8-4e61-927=
+1-c5cfefadabd3">To ease the process of creating SQL JOBS, all the jobs must=
+ be scripted and checked-in to Github</span></p></li>
+<li>
+<p>Azure DevOps pipeline must be used create any SQL JOBs. SQL JOBS should =
+NOT be created directly on vision-prod-mi.</p></li>
+<li>
+<p>The same DevOps pipeline MUST be used to deploy the JOBS to secondary MI=
+ post failover</p></li>
+</ol></li>
+</ol>
+<h2 id=3D"DRStrategyforVisiondatabases(ManagedInstance)-Scaling">Scaling</h=
+2>
+<h4 id=3D"DRStrategyforVisiondatabases(ManagedInstance)-Updated15-Nov-2022"=
+>Updated 15-Nov-2022</h4>
+<p>Compute capacity of DR MI will be kept at 32 cores (same as that of prim=
+ary MI as of September, 2023) . Both will be scaled to 40 cores in November=
+ and December due to holiday season.</p>
+<p>Sql Server =E2=80=9CFailover Rights=E2=80=9D license has been configured=
+ for the DR MI. This license waives the Sql Server license fees.</p>
+<h3 id=3D"DRStrategyforVisiondatabases(ManagedInstance)-Recommendation">Rec=
+ommendation</h3>
+<p>Ideally the size of secondary instance MUST be same as the primary insta=
+nce.</p>
+<h2 id=3D"DRStrategyforVisiondatabases(ManagedInstance)-DNSAlias">DNS Alias=
+</h2>
+<p>Azure creates a DNS alias on creating failover group. DNS alias for Visi=
+on MI is <a class=3D"external-link" href=3D"http://vision-prod-mi-fog.6f416=
+a5e544e.database.windows.net" rel=3D"nofollow">vision-prod-mi-fog.6f416a5e5=
+44e.database.windows.net</a>. This alias always points to the<span class=3D=
+"inline-comment-marker" data-ref=3D"49ec7b75-c881-4fc8-91a7-ba92a3fdcd64"> =
+primary MI in the failover group. So, no change in connection string is req=
+uired in case of failover. All apps accessing Vision databases MUST start u=
+sing this alias.</span></p>
+<p>When VMCSQL07 was there, we were using <a class=3D"external-link" href=
+=3D"http://vision-prod-mi-fog.victra.com" rel=3D"nofollow">vision-prod-mi-f=
+og.victra.com</a> as the DNS alias to support failover to VMCSQL07 and visi=
+on-prod-mi-dr. But as VMCSQL07 has been decommissioned, we can use the defa=
+ult FoG endpoint provided by Azure.</p>
+<p>The secondary MI acts as a DR solution for Vision databases. It will be =
+used only in case of regional outage in East US. We can also use it case of=
+ temporary issues with vision-prod-mi. But in that case all the apps that c=
+onsume Vision databases will be in the East US region. This will introduce =
+significant latency due to cross region data access. All apps that access V=
+ision databases (Vision, Commissions, EDW01) will experience significant la=
+tency. Due to large scale data movement in case of Commission and Seer, the=
+ latency may become unacceptable for end users. So, cross region failover i=
+s not recommended in this scenario.</p>
+    </div>
+</body>
+</html>
+------=_Part_24_182750781.1737981299985--
