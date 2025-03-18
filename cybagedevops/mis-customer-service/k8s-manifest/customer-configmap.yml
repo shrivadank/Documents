@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: customerconfigmap
+data:
+  DB_HOST: __DB_HOST__
+  DB_NAME: __DB_NAME__

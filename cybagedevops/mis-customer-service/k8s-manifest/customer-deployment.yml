@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: mis-service-cus
+
+  labels:
+
+    app: mis-customer
+
+spec:
+
+  replicas: 3
+
+  selector:
+
+    matchLabels:
+
+      app: mis-customer
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: mis-customer
+
+    spec:
+
+      containers:
+
+      - name: customer-container
+
+
+        image: cybage.azurecr.io/mis.service.cus:2022.11.07.10
+
+        ports:
+
+        - containerPort: 8080
+
+        env:
+         - name: DB_HOST
+           valueFrom:
+            configMapKeyRef:
+              name: customerconfigmap           # The ConfigMap this value comes from.
+              key: DB_HOST # The key to fetch.
+         - name: DB_NAME
+           valueFrom:
+            configMapKeyRef:
+              name: customerconfigmap           # The ConfigMap this value comes from.
+              key: DB_NAME # The key to fetch.
+         - name: DB_USERNAME
+           valueFrom:
+             secretKeyRef:
+               name: mysqlsecret
+               key: DB_USERNAME     
+         - name: DB_PASSWORD
+           valueFrom:
+             secretKeyRef:
+               name: mysqlsecret
+               key: DB_PASSWORD
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mis-cus-svc
+spec:
+  selector:
+     app: mis-customer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
