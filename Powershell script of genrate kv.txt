@@ -1,0 +1,130 @@
+$srchsecretname  = $null
+$srchallkeyv = $null
+$subname = $null
+$csv = $null
+$csvpath = "C:\keyvault\common-dev1-dbserver.csv"
+$data = $null
+        #____Search ALL Keyvaults_____
+        $srchallkeyv = $true
+        $keyVaultName = "services-prod-kv"
+        #________________________________
+        #____Search Secret Name Only_____
+        $srchsecretname = $false
+        #________________________________
+function Show-Menu
+{
+   param (
+        [string]$Title 
+    )
+    Clear-Host
+    Write-Host "================ $Title ================"
+    write-host = "1: All"
+    write-host = "2: victra-prod-sub"
+    write-host = "3: victra-dev-sub"
+    write-host = "4: victra-qa-sub"
+    write-host = "5: victra-staging-sub"
+    write-host = "6: quit"
+}
+Show-Menu –Title 'Subscription Menu'
+$selection = Read-Host "Enter the number for the Subscription"
+switch ($selection)
+{
+     '1' {
+        $subname = @('victra-prod-sub','victra-dev-sub','victra-qa-sub','victra-staging-sub')
+     } '2' {
+         $subname = "victra-prod-sub"
+     } '3' {
+         $subname = "victra-dev-sub"
+     } '4' {
+         $subname = "victra-qa-sub"
+     } '5' {
+         $subname = "victra-staging-sub"
+     } '6' {
+         return
+     }
+     }
+$searchTerm = read-host "Enter Search Term"
+if ( $subname -eq $null)
+{
+return
+}
+else
+{
+        foreach ($sub in $subname)
+        {
+        Set-AzContext -Subscription $sub | Out-Null
+            if( $srchallkeyv -eq $true)
+            {
+                #_________Search ALL KVs_________
+                $kvs = Get-AzKeyVault 
+                #________________________________
+            }
+            else
+            {
+                #___________TEST_________________
+                $kvs = Get-AzKeyVault -VaultName $keyVaultName
+                #________________________________
+            }
+                write-Host "Searching Keyvaults in $sub..."
+                foreach ($kv in $kvs )
+                {
+                    # Receive passed-through parameters from the List-Secret <keyVaultName> <searchTerm>                   write-Host "Searching Keyvault: " $kv.VaultName
+                    # Get secrets from vault based on search criteria stipulated in $searchTerm
+                    $secrets = Get-AzKeyVaultSecret -WarningAction SilentlyContinue -VaultName $kv.VaultName -ErrorAction SilentlyContinue  #| where {$_.Name -like $searchTerm}
+                    # Print to console...
+                    #$secrets | ForEach-Object{
+                        foreach ( $sec in $secrets) 
+                        {
+                            if($sec.Enabled -eq "True")
+                                {
+                                    if( $srchsecretname -eq $true) 
+                                    {
+                                            $secretValueText = (Get-AzKeyVaultSecret -WarningAction SilentlyContinue -VaultName $kv.VaultName -Name $sec.name)
+                                            #write-host $secretValueText.name 
+                                            #if ($secretValueText.name.ToString() -cmatch $searchTerm)
+                                            if ($secretValueText.name.ToString() -like $searchTerm)
+                                            {
+                                            $kvname = $kv.VaultName.tostring()
+                                            # ... the name of the Key Vault secret
+                                            #write-host "`n`n"$_.Name -BackgroundColor Cyan -ForegroundColor Black
+                                            write-host "Secret Match: found in keyvault: $kvname | Secret name:" $sec.name "| SUB: " $sub -BackgroundColor Cyan -ForegroundColor Black
+                                            # ... the value of the secret
+                                            $secretValue = Get-AzKeyVaultSecret -WarningAction SilentlyContinue -VaultName $kv.VaultName -Name $sec.name -AsPlainText
+                                            Write-Host $secretValue -BackgroundColor Green -ForegroundColor Black
+                                            }
+                                    }
+                                        else
+                                        {
+                                            #write-host "SecretName: " $sec.name
+                                            $secretValueText = Get-AzKeyVaultSecret -WarningAction SilentlyContinue -VaultName $kv.VaultName -Name $sec.name -AsPlainText
+                                            #$secretValueversion = Get-AzKeyVaultSecret -WarningAction SilentlyContinue -VaultName $kv.VaultName -Name $sec.name | select version
+                                            write-host $secretValueText
+                                            if ($secretValueText -match $searchTerm)
+                                            {
+                                            $kvname = $kv.VaultName.tostring()
+                                            # ... the name of the Key Vault secret
+                                            #write-host "`n`n"$_.Name -BackgroundColor Cyan -ForegroundColor Black
+                                            write-host "Secret: $secretValueText found in keyvault: $kvname secret name:" $sec.name "Found in " $sub -BackgroundColor Cyan -ForegroundColor Black
+                                            # ... the value of the secret
+                                            #Write-Host $secretValueText
+                                            $data = @(
+                                                [pscustomobject]@{
+                                                  Sub = $sub
+                                                  Keyvault = $kvname 
+                                                  Secret  = $sec.name
+                                                 # Version = $secretValueversion.Version
+                                                  Value  = $secretValueText
+                                                }
+                                                )
+                                                 $csv += $data
+                                            }
+                                            $csv | Export-Csv -Path $csvpath
+ 
+                                        }
+                               } 
+                        }
+                #List-Secret  -keyVaultName $kv.VaultName -searchTerm $secret
+                }
+        }
+}
+### Test comment after complete

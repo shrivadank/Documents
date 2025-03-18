@@ -1,0 +1,214 @@
+learn how to monitor your cluster and the applications running 
+on it.
+
+learn how AKS Diagnostics and Azure Monitor
+
+In brief, the following topics will be covered in this chapter:
+1] Monitoring and debugging applications using kubectl
+2]Reviewing metrics reported by Kubernetes
+3]Reviewing metrics from Azure Monitor
+
+--------------------------------------------------------------------------------------------------------
+1]
+
+##monitoring applications:
+
+-- health of applications deployed on Kubernetes
+--Kubernetes infrastructure itself is essential for providing a reliable service to your customers.
+
+ --two primary use cases for monitoring:
+
+1.Ongoing monitoring to get alerts if something is not behaving as expected
+2.Troubleshooting and debugging application errors
+
+***************************
+
+##Debugging applications:
+
+--how to inspect applications
+
+--start seeing how you can debug issues with deployments.
+
+
+$$ kubectl create -f guestbook-all-in-one.yaml
+
+--Image pull errors
+
+$$ kubectl edit deployment/frontend
+
+change the tag of img     v_non_existent
+
+$$ kubectl get pods
+
+$$ kubectl describe pods/<failed pod name>
+
+
+$$ kubectl edit deployment/frontend
+
+**********************************
+
+## Readiness and liveness probes
+
+--Kubernetes uses liveness and readiness probes to monitor the availability of your applications.
+
+
+---• A liveness probe monitors the availability of an application while it is 
+running. If a liveness probe fails, Kubernetes will restart your pod. This could 
+be useful to catch deadlocks, infinite loops, or just a "stuck" application.
+
+---A readiness probe monitors when your application becomes available. If a 
+readiness probe fails, Kubernetes will not send any traffic to the unready 
+pods. This is useful if your application has to go through some configuration 
+before it becomes available, or if your application has become overloaded 
+but is recovering from the additional load. By having a readiness probe fail, 
+your application will temporarily not get any more traffic, giving it the ability 
+to recover from the increased load.
+
+
+## Building two web containers
+
+$$ kubectl create configmap server1 --from-file=index1.html
+$$ kubectl create configmap server2 --from-file=index2.html
+$$ kubectl create configmap healthy --from-file=healthy.html
+
+
+$$ kubectl create -f webdeploy1.yaml
+$$ kubectl create -f webdeploy2.yaml
+
+$$ kubectl create -f webservice.yaml
+
+## Failing the readiness probe causes traffic to temporarily stop
+
+kubectl get service
+
+--During the upcoming tests, you'll use a small script called testWeb.sh
+
+chmod +x testWeb.sh
+
+./testWeb.sh <external-ip>
+
+kubectl get pods
+
+
+--fail the readiness probe in server 1
+
+kubectl exec <server1 pod name> -- \
+  mv /usr/share/nginx/html/index.html \
+ /usr/share/nginx/html/index1.html
+
+
+kubectl get pods -w
+
+
+--- This should direct no more traffic to the server 1 pod
+
+./testWeb.sh <external-ip>
+
+
+---now restore the state of server 1 by moving the file back to its rightful 
+place:
+
+kubectl exec <server1 pod name> -- mv \
+  /usr/share/nginx/html/index1.html \
+ /usr/share/nginx/html/index.html
+
+./testWeb.sh <external-ip>
+
+
+
+### A failing liveness probe restarts the pod
+
+--You can repeat the previous process with the liveness probe as well. When the 
+liveness probe fails, Kubernetes is expected to restart that pod.
+
+
+--deleting the health file
+
+kubectl exec <server 2 pod name> -- \
+ rm /usr/share/nginx/html/healthy.html
+
+kubectl get pods -w
+
+kubectl describe pod <server2 pod name>
+
+
+kubectl delete deployment server1 server2
+kubectl delete service web
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+
+2]      Metrics reported by Kubernetes
+
+
+
+kubectl get nodes
+
+
+kubectl get -o wide nodes
+
+
+kubectl top nodes
+
+
+### Pod consumption   :::: learn how you can use kubectl to get information about 
+the CPU and memory utilization of pods.
+
+kubectl get pods -n kube-system
+
+
+###kubectl describe pod coredns-<pod id> -n kube-system
+
+kubectl top pods --all-namespaces
+
+---Requests and limits are used to perform capacity management in a cluster
+
+kubectl top pods --all-namespaces   -----get the actual CPU and memory consumption of a pod
+
+
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+
+### Using AKS Diagnostics
+
+When you are experiencing issues in AKS, a good place to start your exploration 
+is the AKS Diagnostics pane. It provides you with tools that help investigate any 
+issues related to underlying infrastructure or system cluster components.
+
+
+
+---two tools to diagnose and explore issues
+
+1..]]is Cluster Insights, =====Cluster Insights uses cluster logs and 
+configuration on your cluster to perform a health check and compare your cluster 
+against best practices. It contains useful information and relevant health indicators 
+in case anything is misconfigured in your cluster. 
+
+and 2..]]is Networking ==== allows you to interactively troubleshoot 
+networking issues in your cluster.
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
+
+
+
+3]   Azure Monitor metrics and logs
+
+
+Insights
+
+-- cpu ,  memory , node count , Active pod count
+
+-- nodes , controller , report , containers
+
+--- Reports tab in AKS Insights gives you access to a number of preconfigured 
+monitoring workbooks
+
+
+--- Deployments workbook
+
+
+
